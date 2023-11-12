@@ -1,0 +1,6 @@
+{
+    "endpoint_user": "https://ggmax.com.br/api/user",
+    "endpoint_auth": "https://ggmax.com.br/api/auth",
+    "endpoint_orders": "https://ggmax.com.br/api/orders",
+    "endpoint_announcements": "https://ggmax.com.br/api/announcements"
+}
