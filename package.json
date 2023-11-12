@@ -1,0 +1,6 @@
+{"type":"module",
+"main":"src/menu.js",
+"dependencies":{
+    "@gluon-framework/gluon":"^0.14.0"
+}
+}
