@@ -97,8 +97,8 @@ let removeFolderLoop = async (folder) => {
 Window.close = async () => {
   let close = await Window._close();
   // wait for file to be removable
-  if (fs.existsSync('./gluon_data')) {
-  await removeFolderLoop('./gluon_data');
+  if (fs.existsSync('./src/menu/gluon_data')) {
+  await removeFolderLoop('./src/menu/gluon_data');
   }
 
   return close;
