@@ -1,6 +1,6 @@
 import config from './config.json' assert { type: 'json' };
 
-export async function getAnnouncements(token, additionals = 'offset=0&announcement_status=active,pending,reproved,disabled,suspended') {
+export async function getAnnouncements(token, additionals = 'limit=999999&offset=0&announcement_status=active,pending,reproved,disabled,suspended') {
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     /*
     "data": {
@@ -62,7 +62,7 @@ export async function getAnnouncements(token, additionals = 'offset=0&announceme
 }
 
 
-export async function getOrders(token, additionals = 'filter=sales') {
+export async function getOrders(token, additionals = 'limit=999999&filter=sales') {
     /*
     {
     "success": true,
