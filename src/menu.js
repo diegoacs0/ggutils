@@ -201,7 +201,7 @@ async function start() {
             itemsQuantity2 = Number.parseInt(itemsQuantity2);
 
             const dispenser2 = ggutils.dispenser();
-            let itemsRes2 = await dispenser2.getItems(data.selectedAnnouncement.id, 'status=available&'+(data.selectedAnnouncementItem == null ? '' : 'announcement_item_id='+data.selectedAnnouncementItem.id));
+            let itemsRes2 = await dispenser2.getItems(data.selectedAnnouncement.id, 'limit=99999&status=available&'+(data.selectedAnnouncementItem == null ? '' : 'announcement_item_id='+data.selectedAnnouncementItem.id));
             if (!itemsRes2.success) throw new Error('Error getting items: ' + itemsRes2);
             items = itemsRes2.data.items;
             if (itemsQuantity2 != 0) items = items.slice(0, itemsQuantity2);
@@ -224,10 +224,11 @@ async function start() {
 
             let string = await prompt('Texto da avaliação: ');
             const load4 = setInterval(loadingBar, 100);
-            let pendentReviews = await ggutils.getOrders('filter=sales&offset=0&payment_status=approved&only_pending_reviews=true');
+            let pendentReviews = await ggutils.getOrders('filter=sales&offset=0&payment_status=approved&only_pending_reviews=true&limit=999999');
             if (!pendentReviews.success) throw new Error('Error getting pendent reviews: ' + pendentReviews);
             pendentReviews = pendentReviews.data.orders;
             let announcementItemID = data.selectedAnnouncementItem == null ? null : data.selectedAnnouncementItem.id;
+
             for (let review of pendentReviews) {
                 let orderAnnouncement = review.order_announcements[0];
                 if (orderAnnouncement.announcement_id == data.selectedAnnouncement.id && orderAnnouncement.announcement_item_id == announcementItemID ) {
@@ -235,10 +236,14 @@ async function start() {
                         "message": string,
                         "review_type": "positive"
                     };
+                    try {
                     let reviewRes = await ggutils.makeReview(review.id, reviewSend);
-                    if (!reviewRes.success) throw new Error('Error making review: ' + reviewRes);                
+                    if (!reviewRes.success) throw new Error('Error making review: ' + reviewRes);
+                    } catch (e) {
+                    }
                 }
             }
+
             clearInterval(load4);
             process.stdout.write('\r' + ' '.repeat(process.stdout.columns));
             console.log(chalk.green('Sucesso!'));
