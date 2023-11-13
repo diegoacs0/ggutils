@@ -229,6 +229,8 @@ async function start() {
             pendentReviews = pendentReviews.data.orders;
             let announcementItemID = data.selectedAnnouncementItem == null ? null : data.selectedAnnouncementItem.id;
 
+            /*
+            ------------ FILA GRADUAL
             for (let review of pendentReviews) {
                 let orderAnnouncement = review.order_announcements[0];
                 if (orderAnnouncement.announcement_id == data.selectedAnnouncement.id && orderAnnouncement.announcement_item_id == announcementItemID ) {
@@ -242,7 +244,30 @@ async function start() {
                     } catch (e) {
                     }
                 }
+            }*/
+
+            let i = 0;
+            while (i < pendentReviews.length) {
+                let NumberAtOnce = 5;
+                let promises = [];
+
+                for (let j = 0; j < NumberAtOnce; j++) {
+                    let review = pendentReviews[i];
+                    if (review == undefined) break;
+                    let orderAnnouncement = review.order_announcements[0];
+                    if (orderAnnouncement.announcement_id == data.selectedAnnouncement.id && orderAnnouncement.announcement_item_id == announcementItemID ) {
+                        let reviewSend = {
+                            "message": string,
+                            "review_type": "positive"
+                        };
+                        promises.push(ggutils.makeReview(review.id, reviewSend));
+                    }
+                    i++;
+                }
+
+                await Promise.all(promises);
             }
+            
 
             clearInterval(load4);
             process.stdout.write('\r' + ' '.repeat(process.stdout.columns));
