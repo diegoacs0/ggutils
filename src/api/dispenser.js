@@ -1,7 +1,7 @@
 import config from './config.json' assert { type: 'json' };
 
 // https://ggmax.com.br/api/announcements/287052/dispenser/items?offset=0
-export async function getItems(token, announcement_id, additionals='offset=0') {
+export async function getItems(token, announcement_id, additionals='limit=999999&offset=0') {
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items?${additionals}`, {
         "headers": {
@@ -18,7 +18,7 @@ export async function getItems(token, announcement_id, additionals='offset=0') {
     return json;
 }
 
-export async function getItem(token, announcement_id, item_id, additionals='') {
+export async function getItem(token, announcement_id, item_id, additionals='limit=999999&') {
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items/${item_id}?${additionals}`, {
         "headers": {
