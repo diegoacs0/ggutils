@@ -170,7 +170,7 @@ async function start() {
             itemsQuantity = Number.parseInt(itemsQuantity);
 
             const dispenser = ggutils.dispenser();
-            let itemsRes = await dispenser.getItems(data.selectedAnnouncement.id, 'status=available&'+(data.selectedAnnouncementItem == null ? '' : 'announcement_item_id='+data.selectedAnnouncementItem.id));
+            let itemsRes = await dispenser.getItems(data.selectedAnnouncement.id, 'limit=999999&status=available&'+(data.selectedAnnouncementItem == null ? '' : 'announcement_item_id='+data.selectedAnnouncementItem.id));
             if (!itemsRes.success) throw new Error('Error getting items: ' + itemsRes);
             items = itemsRes.data.items;
             if (itemsQuantity != 0) items = items.slice(0, itemsQuantity);
