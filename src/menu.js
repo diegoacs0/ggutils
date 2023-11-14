@@ -229,8 +229,8 @@ async function start() {
             pendentReviews = pendentReviews.data.orders;
             let announcementItemID = data.selectedAnnouncementItem == null ? null : data.selectedAnnouncementItem.id;
 
-            /*
-            ------------ FILA GRADUAL
+            
+           // ------------ FILA GRADUAL
             for (let review of pendentReviews) {
                 let orderAnnouncement = review.order_announcements[0];
                 if (orderAnnouncement.announcement_id == data.selectedAnnouncement.id && orderAnnouncement.announcement_item_id == announcementItemID ) {
@@ -244,9 +244,9 @@ async function start() {
                     } catch (e) {
                     }
                 }
-            }*/
+            }
 
-            let i = 0;
+          /*  let i = 0;
             while (i < pendentReviews.length) {
                 let NumberAtOnce = 5;
                 let promises = [];
@@ -266,7 +266,7 @@ async function start() {
                 }
 
                 await Promise.all(promises);
-            }
+            } */
             
 
             clearInterval(load4);
