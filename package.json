@@ -1,6 +1,9 @@
-{"type":"module",
-"main":"src/menu.js",
-"dependencies":{
-    "@gluon-framework/gluon":"^0.14.0"
-}
+{
+    "type": "module",
+    "main": "src/menu.js",
+    "dependencies": {
+        "@gluon-framework/gluon": "^0.14.0",
+        "chalk": "^5.3.0",
+        "prompt-sync": "^4.2.0"
+    }
 }
