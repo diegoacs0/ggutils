@@ -48,9 +48,8 @@ export async function getAnnouncements(token, additionals = 'limit=999999&offset
     */
     var res = await fetch(`${config.endpoint_user}/announcements?${additionals}`, {
         "headers": {
-            "accept": "application/json, text/plain, */*",
+            ...config.headers,
             "authorization": `${token}`,
-            "content-type": "application/json",
         },
         "method": "GET",
         "mode": "cors",
@@ -167,9 +166,8 @@ export async function getOrders(token, additionals = 'limit=999999&filter=sales'
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     var res = await fetch(`${config.endpoint_user}/v2/orders?${additionals}`, {
         "headers": {
-            "accept": "application/json, text/plain, */*",
+            ...config.headers,
             "authorization": `${token}`,
-            "content-type": "application/json",
         },
         "method": "GET",
         "mode": "cors",
@@ -189,9 +187,8 @@ export async function getAnnouncement(token, id, additionals) {
     if (typeof additionals === 'undefined') additionals = '';
     var res = await fetch(`${config.endpoint_announcements}/${id}?${additionals}`, {
         "headers": {
-            "accept": "application/json, text/plain, */*",
+            ...config.headers,
             "authorization": `${token}`,
-            "content-type": "application/json",
         },
         "method": "GET",
         "mode": "cors",
@@ -206,9 +203,8 @@ export async function getOrder(token, id, additionals) {
     if (typeof additionals === 'undefined') additionals = '';
     var res = await fetch(`${config.endpoint_orders}/${id}`, {
         "headers": {
-            "accept": "application/json, text/plain, */*",
+            ...config.headers,
             "authorization": `${token}`,
-            "content-type": "application/json",
         },
         "method": "GET",
         "mode": "cors",
@@ -238,9 +234,8 @@ export async function makeReview(token, id, review, additionals) {
     
     var res = await fetch(`${config.endpoint_orders}/${id}/user-reviews`, {
         "headers": {
-            "accept": "application/json, text/plain, */*",
+            ...config.headers,
             "authorization": `${token}`,
-            "content-type": "application/json",
         },
         "body": JSON.stringify(review),
         "method": "POST",
