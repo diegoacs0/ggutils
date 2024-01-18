@@ -6,8 +6,7 @@ export async function isTokenDisponible(token) {
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
 var req = await fetch(`${config.endpoint_user}/token`, {
   "headers": {
-    "accept": "application/json, text/plain, */*",
-    "content-type": "application/json",
+    ...config.headers,
     "authorization": token,
   },
   "method": "GET",
@@ -21,6 +20,7 @@ return json.success;
 }
 
 export async function refreshToken(ref_token) {
+  console.log(`${config.endpoint_auth}/refresh-token`)
     /*
     input: Bearer token
     output: {
@@ -34,11 +34,9 @@ export async function refreshToken(ref_token) {
     let body = JSON.stringify({
         refresh_token: ref_token
     });
+    console.log(body)
     var req = await fetch(`${config.endpoint_auth}/refresh-token`, {
-        "headers": {
-          "accept": "application/json, text/plain, */*",
-          "content-type": "application/json",
-        }, 
+        "headers": config.headers, 
         "body": body,
         "method": "POST",
         "mode": "cors",
