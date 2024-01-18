@@ -5,8 +5,7 @@ export async function getItems(token, announcement_id, additionals='limit=999999
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items?${additionals}`, {
         "headers": {
-          "accept": "application/json, text/plain, */*",
-          "content-type": "application/json",
+          ...config.headers,
           "authorization": token,
         },
         "method": "GET",
@@ -22,8 +21,7 @@ export async function getItem(token, announcement_id, item_id, additionals='limi
     if (!token.startsWith('Bearer ')) token = 'Bearer ' + token;
     var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items/${item_id}?${additionals}`, {
         "headers": {
-          "accept": "application/json, text/plain, */*",
-          "content-type": "application/json",
+          ...config.headers,
           "authorization": token,
         },
         "method": "GET",
@@ -47,8 +45,7 @@ export async function addItem(token, announcement_id, content, announcement_item
 
   var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items`, {
     "headers": {
-      "accept": "application/json, text/plain, */*",
-      "content-type": "application/json",
+      ...config.headers,
       "authorization": token,
     },
     "method": "POST",
@@ -76,8 +73,7 @@ export async function addItems(token, announcement_id, items, announcement_item_
 
   var res = await fetch(`${config.endpoint_announcements}/${announcement_id}/dispenser/items`, {
     "headers": {
-      "accept": "application/json, text/plain, */*",
-      "content-type": "application/json",
+      ...config.headers,
       "authorization": token,
     },
     "method": "POST",
