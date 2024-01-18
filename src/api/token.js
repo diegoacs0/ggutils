@@ -20,7 +20,6 @@ return json.success;
 }
 
 export async function refreshToken(ref_token) {
-  console.log(`${config.endpoint_auth}/refresh-token`)
     /*
     input: Bearer token
     output: {
@@ -34,7 +33,6 @@ export async function refreshToken(ref_token) {
     let body = JSON.stringify({
         refresh_token: ref_token
     });
-    console.log(body)
     var req = await fetch(`${config.endpoint_auth}/refresh-token`, {
         "headers": config.headers, 
         "body": body,
